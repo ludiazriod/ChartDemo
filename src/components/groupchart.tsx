@@ -14,47 +14,28 @@ const GroupChart = (): JSX.Element => {
     return(
         <div style={{display: "flex", flexDirection:"column"}}>
             <div style={{display: "flex"}}>
-                <div style={{width: "50%"}}>
+                <div style={{width: "100%"}}>
                     <VictoryChart
-                        domainPadding={{x: 50}}
+                        domainPadding={40}
                     >
                         <VictoryGroup 
-                            offset={20}
-                            colorScale={"qualitative"}
+                            offset={15}
+                            colorScale={["#0B8EAB", "#F93E63", "#FFC152", "#A2D9E7"]}
+                            categories={{x: ["Week 1", "Week 2", "Week 3", "Week 4"], y:["10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]}}
                         >
                             <VictoryBar
-                                data={[{ x: 1, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 5 }]}
-                                alignment="start"
-                                barRatio={0.4}
+                                data={[{ x: 1, y: 9 }, { x: 2, y: 9 }, { x: 3, y: 9 }, {x: 4, y: 9}]}                                
                             />
                             <VictoryBar
-                                data={[{ x: 1, y: 2 }, { x: 2, y: 1 }, { x: 3, y: 7 }]}
-                                alignment="start"
-                                barRatio={0.4}
+                                data={[{ x: 1, y: 6 }, { x: 2, y: 6 }, { x: 3, y: 6 }, {x: 4, y: 6}]}
                             />
                             <VictoryBar
-                                data={[{ x: 1, y: 3 }, { x: 2, y: 4 }, { x: 3, y: 9 }]}
-                                alignment="start"
-                                barRatio={0.4}
+                                data={[{ x: 1, y: 4.5 }, { x: 2, y: 4.5 }, { x: 3, y: 4.5 }, {x: 4, y: 4.5}]}
+                            />
+                            <VictoryBar
+                                data={[{ x: 1, y: 8 }, { x: 2, y: 8 }, { x: 3, y: 8 }, {x: 4, y: 8}]}
                             />
                         </VictoryGroup>
-                    </VictoryChart>
-                </div>
-                <div style={{width: "50%"}}>
-                    <VictoryChart
-                        domainPadding={{ x: 20 }}
-                    >
-                        <VictoryBar
-                            horizontal
-                            categories={{x: ["Task#4", "Task#3", "Task#2", "Task#1"], y:["10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]}}
-                            data={[
-                                { x: "Task#1", y: aux[0], fill: "#73BFF9"}, 
-                                { x: "Task#2", y: aux[1], fill: "#479FF8"}, 
-                                { x: "Task#3", y: aux[2], fill: "#479FF8"}, 
-                                { x: "Task#4", y: aux[3], fill: "#479FF8"}
-                            ]}
-                            barRatio={0.4}
-                        />
                     </VictoryChart>
                 </div>
             </div>
