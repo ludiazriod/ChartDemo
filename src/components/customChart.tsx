@@ -3,6 +3,35 @@ import victory, {VictoryAxis, VictoryBar, VictoryBrushContainer, VictoryChart, V
 import LineChar from "./linechar";
 import PieChart from "./piechart";
 
+const CustomAxis = (props: any) => {
+    return (
+      <svg>
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="5"
+            markerHeight="4"
+            refX="0"
+            refY="2"
+            orient="auto"
+            fill="#CCC"
+          >
+            <polygon points="0 0, 5 2, 0 4" />
+          </marker>
+        </defs>
+        <line
+          x1={props.x1}
+          y1={props.y2} 
+          x2={props.x2}
+          y2={props.dimension === 'x' ? props.y2 : props.y1}
+          stroke="#CCC"
+          stroke-width="2"
+          marker-end="url(#arrowhead)"
+        />
+      </svg>
+    );
+  };
+
 const CustomChart = () => {
     const domainPadding: number = 40;
     const tickeLabelSize: string = "10px"
@@ -11,25 +40,25 @@ const CustomChart = () => {
             <g transform="translate(0, 40)">
                 <VictoryAxis
                     dependentAxis
+                    standalone={false}
                     domainPadding={{y: 10}}
                     height={350}
                     padding={{bottom: 113, top: 148, left: 50}}
-                    standalone={false}
-                    tickValues={[1, 2, 3, 4]}
+                    domain={[1,4]}
+                    tickValues={[1,2,3,4]}
                     tickFormat={(elem) => {
-                        return `Part#${elem}`
+                        return `Part#${5-elem}`
                     }}
-                    domain={[4,1]}
                     orientation="left"
                     style={{
                         tickLabels: {fontSize: tickeLabelSize} 
                     }}
                 />
                 <VictoryAxis
+                    standalone={false}
                     domainPadding={{x: 30}}
                     width={450}
                     padding={{bottom: 63, left: 50, right: 50, top: 0}}
-                    standalone={false}
                     domain={[1,4]}
                     tickValues={[1, 2, 3, 4]}
                     tickFormat={(elem) => {
@@ -59,10 +88,10 @@ const CustomChart = () => {
 
                 <g transform="translate(0, 77)">
                     <VictoryScatter
+                        standalone={false}
                         domainPadding={{x: 30}}
                         symbol="square"
                         size={11}
-                        standalone={false}
                         data={[
                             {x: 1, y: 4, fill: "#0B8EAB"},
                             {x: 2, y: 4, fill: "#0B8EAB"},
@@ -78,10 +107,10 @@ const CustomChart = () => {
                 </g>
                 <g transform="translate(0, 54)">
                     <VictoryScatter
+                        standalone={false}
                         domainPadding={{x: 30}}
                         symbol="square"
                         size={11}
-                        standalone={false}
                         data={[
                             {x: 1, y: 4, fill: "#AAAAAA"},
                             {x: 2, y: 4, fill: "#0B8EAB"},
@@ -97,10 +126,10 @@ const CustomChart = () => {
                 </g>
                 <g transform="translate(0, 31)">
                     <VictoryScatter
+                        standalone={false}
                         domainPadding={{x: 30}}
                         symbol="square"
                         size={11}
-                        standalone={false}
                         data={[
                             {x: 1, y: 4, fill: "#0B8EAB"},
                             {x: 2, y: 4, fill: "#0B8EAB"},
@@ -116,10 +145,10 @@ const CustomChart = () => {
                 </g>
                 <g transform="translate(0, 8)">
                     <VictoryScatter
+                        standalone={false}
                         domainPadding={{x: 30}}
                         symbol="square"
                         size={11}
-                        standalone={false}
                         data={[
                             {x: 1, y: 4, fill: "#0B8EAB"},
                             {x: 2, y: 4, fill: "#0B8EAB"},
