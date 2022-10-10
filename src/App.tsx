@@ -6,6 +6,10 @@ import PieChart from './components/piechart';
 import GroupChart from './components/groupchart';
 import LineChar from './components/linechar';
 import BarChar from './components/barChar';
+import BarChartSimple from './components/barChartSimple';
+import BarStack from './components/barStack';
+import BarStackComplex from './components/barStackComplex';
+import CustomChart from './components/customChart';
 
 function App() {
   const [showPieChars, setShowPieChars] = useState<boolean>(false)
@@ -24,6 +28,11 @@ function App() {
       {showGroupBarChar && <GroupChart/>}
       {showLineChar && <LineChar/>}
       {showBarChar && <BarChar/>}
+      <div style={{display: "flex", alignItems: "center", width: "100%", height: "100%", justifyContent: "center"}}>
+        <div style={{width: "50%", height: "100%"}}>  
+          {<CustomChart/>}
+        </div>
+      </div>
     </div>
   );
 }
