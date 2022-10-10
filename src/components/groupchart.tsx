@@ -3,12 +3,6 @@ import victory, {VictoryBar, VictoryChart, VictoryGroup, VictoryLabel, VictoryLi
 
 const colors = ["#73BFF9", "#479FF8", "#3274B5", "#1E4C7C"]
 
-const Prueba = (datum: any) => {
-    if(datum.y === "Task#1"){
-        
-    }
-}
-
 const GroupChart = (): JSX.Element => {
     const aux: number[] = [5.5, 1, 6.4, 8.1]
     return(
