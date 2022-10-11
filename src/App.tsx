@@ -9,7 +9,8 @@ import BarChar from './components/barChar';
 import BarChartSimple from './components/barChartSimple';
 import BarStack from './components/barStack';
 import BarStackComplex from './components/barStackComplex';
-import CustomChart from './components/customChart';
+import TaskChart from './components/taskChart';
+import GlobalChart from './components/globalChart';
 
 function App() {
   const [showPieChars, setShowPieChars] = useState<boolean>(false)
@@ -29,8 +30,8 @@ function App() {
       {showLineChar && <LineChar/>}
       {showBarChar && <BarChar/>}
       <div style={{display: "flex", alignItems: "center", width: "100%", height: "100%", justifyContent: "center"}}>
-        <div style={{width: "50%", height: "100%"}}>  
-          {<CustomChart/>}
+        <div style={{width: "100%", height: "100%"}}>  
+          {<GlobalChart/>}
         </div>
       </div>
     </div>

@@ -1,38 +1,7 @@
 import React from "react";
 import victory, {VictoryAxis, VictoryBar, VictoryBrushContainer, VictoryChart, VictoryGroup, VictoryLabel, VictoryLine, VictoryPie, VictoryScatter, VictoryStack} from "victory";
-import LineChar from "./linechar";
-import PieChart from "./piechart";
 
-const CustomAxis = (props: any) => {
-    return (
-      <svg>
-        <defs>
-          <marker
-            id="arrowhead"
-            markerWidth="5"
-            markerHeight="4"
-            refX="0"
-            refY="2"
-            orient="auto"
-            fill="#CCC"
-          >
-            <polygon points="0 0, 5 2, 0 4" />
-          </marker>
-        </defs>
-        <line
-          x1={props.x1}
-          y1={props.y2} 
-          x2={props.x2}
-          y2={props.dimension === 'x' ? props.y2 : props.y1}
-          stroke="#CCC"
-          stroke-width="2"
-          marker-end="url(#arrowhead)"
-        />
-      </svg>
-    );
-  };
-
-const CustomChart = () => {
+const TaskChart = () => {
     const domainPadding: number = 40;
     const tickeLabelSize: string = "10px"
     return(
@@ -194,4 +163,4 @@ const CustomChart = () => {
     )
 }
 
-export default CustomChart;
+export default TaskChart;
