@@ -1,16 +1,33 @@
 import React, {useState} from "react";
-import victory, {VictoryAxis, VictoryBar, VictoryBrushContainer, VictoryChart, VictoryGroup, VictoryLabel, VictoryLine, VictoryPie, VictoryScatter, VictoryStack} from "victory";
+import victory, {VictoryChart, VictoryGroup, VictoryLabel, VictoryLine,VictoryScatter} from "victory";
 
-const GlobalChart = () => {
+type Props = {
+    data: Array<Array<{
+        x: string | number,
+        y: string | number,
+        y0?: string |number
+    }>>
+    width?: number,
+    height?: number,
+    colorScale?: Array<string>,
+    textArr?: Array<string>
+}
+
+const GlobalChart = (props: Props) => {
     const [displayed, setDisplayed] = useState<boolean[]>([true, false, false, false, false])
-    
+    const textArr: string[] = ["Show all", "Reading", "Writing", "Speaking" ,"Listening"]
+    const colorArr: string[] = ["#454545", "#0B8EAB", "#F93E63", "#FFC152", "#A2D9E7"]
+    const domainPadding: number = 20;
+    const width: number = props.width ? props.width : 1000;
+    const height: number = props.height ? props.height : 350;
     const changeValue = (index: number) => {
         return displayed.map((elem,i) => {
             return index===0 ? (i===index ? true : false) : (i===index ? !elem : (i===0 ? false : elem))
         })
     }
+
     return(
-        <svg viewBox="0 0 1000 350">
+        <svg viewBox={`0 0 ${width} ${height}`}>
             <g transform="translate(0, 40)">
                 <VictoryChart
                     standalone={false}
@@ -18,196 +35,61 @@ const GlobalChart = () => {
                         x: ["Week 1", "Week 2", "Week 3", "Week 4"],
                         y: ["10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]
                     }}
-                    domainPadding={20}
-                >   
-                    <VictoryLabel
-                        textAnchor="middle"
-                        verticalAnchor="middle"
-                        text={"Show all"}
-                        events={{
-                            onClick: (e) => setDisplayed(changeValue(0))
-                        }}
-                        style={{
-                            fontSize: 11
-                        }}
-                        backgroundStyle={{
-                            fill: displayed[0] ? "#D3CFCF" : "transparent",
-                            stroke: "blue",
-                        }}
-                        backgroundPadding={{left: 15, right:8, top: 4, bottom: 4}}
-                        x={110}
-                        y={50}
-                    />
-                    <VictoryLabel
-                        textAnchor="middle"
-                        verticalAnchor="middle"
-                        text="Reading"
-                        events={{
-                            onClick: (e) => setDisplayed(changeValue(1))
-                        }}
-                        style={{
-                            fontSize: 11
-                        }}
-                        backgroundStyle={{
-                            fill: displayed[1] ? "#D3CFCF" : "transparent"
-                        }}
-                        backgroundPadding={{left: 15, right:8, top: 4, bottom: 4}}
-                        x={180}
-                        y={50}
-                    />
-                    <VictoryLabel
-                        textAnchor="middle"
-                        verticalAnchor="middle"
-                        text="Writing"
-                        events={{
-                            onClick: (e) => setDisplayed(changeValue(2))
-                        }}
-                        style={{
-                            fontSize: 11
-                        }}
-                        backgroundStyle={{
-                            fill: displayed[2] ? "#D3CFCF" : "transparent"
-                        }}
-                        backgroundPadding={{left: 15, right:8, top: 4, bottom: 4}}
-                        x={250}
-                        y={50}
-                    />
-                    <VictoryLabel
-                        textAnchor="middle"
-                        verticalAnchor="middle"
-                        text="Speaking"
-                        events={{
-                            onClick: (e) => setDisplayed(changeValue(3))
-                        }}
-                        style={{
-                            fontSize: 11
-                        }}
-                        backgroundStyle={{
-                            fill: displayed[3] ? "#D3CFCF" : "transparent"
-                        }}
-                        backgroundPadding={{left: 15, right:8, top: 4, bottom: 4}}
-                        x={320}
-                        y={50}
-                    />
-                    <VictoryLabel
-                        textAnchor="middle"
-                        verticalAnchor="middle"
-                        text="Listening"
-                        events={{
-                            onClick: (e) => setDisplayed(changeValue(4))
-                        }}
-                        style={{
-                            fontSize: 11
-                        }}
-                        backgroundStyle={{
-                            fill: displayed[4] ? "#D3CFCF" : "transparent", borderRadius: 10
-                        }}
-                        backgroundPadding={{left: 15, right:8, top: 4, bottom: 4}}
-                        x={393}
-                        y={50}
-                    />
-                    {(displayed[0] || displayed[1]) &&
-                        <VictoryGroup
-                            data={[
-                                {x: 1, y: 1},
-                                {x: 2, y: 9},
-                                {x: 3, y: 2},
-                                {x: 4, y: 5},
-                            ]}
-                            domainPadding={20}
-                        >
-                            <VictoryLine
-                                style={{
-                                    data: {stroke: "#0B8EAB"}
+                    domainPadding={domainPadding}
+                > 
+                    {displayed.map((elem, i) => {
+                        const text: string = props.textArr ? props.textArr[i] : textArr[i];
+                        return (
+                            <VictoryLabel key={i}
+                                textAnchor="middle"
+                                verticalAnchor="middle"
+                                text={text}
+                                events={{
+                                    onClick: (e) => setDisplayed(changeValue(i))
                                 }}
-                            />
-                            <VictoryScatter
                                 style={{
-                                    data: {
-                                        fill: "#0B8EAB"
-                                    }
+                                    fontSize: 11
                                 }}
-                            />
-                        </VictoryGroup>
-                    }
-                    {(displayed[0] || displayed[2]) &&
-                        <VictoryGroup
-                            data={[
-                                {x: 1, y: 9},
-                                {x: 2, y: 8},
-                                {x: 3, y: 3},
-                                {x: 4, y: 6},
-                            ]}
-                            domainPadding={20}
-                        >
-                            <VictoryLine
-                                style={{
-                                    data: {stroke: "#F93E63"}
+                                backgroundStyle={{
+                                    fill: displayed[i] ? "#D3CFCF" : "transparent"
                                 }}
+                                backgroundPadding={{left: 15, right: 8, top: 4, bottom: 4}}
+                                x={110+(70*i)}
+                                y={50}
                             />
-                            <VictoryScatter
-                                style={{
-                                    data: {
-                                        fill: "#F93E63"
-                                    }
-                                }}
-                            />
-                        </VictoryGroup>
-                    }
-                    {(displayed[0] || displayed[3]) &&
-                        <VictoryGroup
-                            data={[
-                                {x: 1, y: 7},
-                                {x: 2, y: 3},
-                                {x: 3, y: 10},
-                                {x: 4, y: 2},
-                            ]}
-                            domainPadding={20}
-                        >
-                            <VictoryLine
-                                style={{
-                                    data: {stroke: "#FFC152"}
-                                }}
-                            />
-                            <VictoryScatter
-                                style={{
-                                    data: {
-                                        fill: "#FFC152"
-                                    }
-                                }}
-                            />
-                        </VictoryGroup>
-                    }
-                    {(displayed[0] || displayed[4]) &&
-                        <VictoryGroup
-                            data={[
-                                {x: 1, y: 6},
-                                {x: 2, y: 1},
-                                {x: 3, y: 4},
-                                {x: 4, y: 3},
-                            ]}
-                            domainPadding={20}
-                        >
-                            <VictoryLine
-                                style={{
-                                    data: {stroke: "#A2D9E7"}
-                                }}
-                            />
-                            <VictoryScatter
-                                style={{
-                                    data: {
-                                        fill: "#A2D9E7"
-                                    }
-                                }}
-                            />
-                        </VictoryGroup>
-                    }
+                        )
+                    })}
+                    {displayed.map((elem, i) => {
+                        const color: string = props.colorScale ? props.colorScale[i] : colorArr[i]
+                        console.log(props.data[i+1])
+                        return(
+                            (i!==0) && (displayed[0] || displayed[i]) &&
+                                <VictoryGroup key={i}
+                                    data={props.data[i-1]}
+                                    domainPadding={domainPadding}
+                                >
+                                    <VictoryLine
+                                        style={{
+                                            data: {stroke: color}
+                                        }}
+                                    />
+                                    <VictoryScatter
+                                        style={{
+                                            data: {
+                                                fill: color
+                                            }
+                                        }}
+                                    />
+                                </VictoryGroup>
+                        )
+                    })}
                 </VictoryChart>
-                <rect x={79} y={48.5} width={10} height={10} fill="#454545" onClick={(e) => setDisplayed(changeValue(0))}/>
-                <rect x={151} y={49} width={10} height={10} fill="#0B8EAB" onClick={(e) => setDisplayed(changeValue(1))}/>
-                <rect x={221} y={49} width={10} height={10} fill="#F93E63" onClick={(e) => setDisplayed(changeValue(2))}/>
-                <rect x={289} y={49} width={10} height={10} fill="#FFC152" onClick={(e) => setDisplayed(changeValue(3))}/>
-                <rect x={362} y={49} width={10} height={10} fill="#A2D9E7" onClick={(e) => setDisplayed(changeValue(4))}/>
+                {/* {props.colorScale ? props.colorScale[] : colorArr[]} */}
+                <rect x={79}  y={49} width={10} height={10} fill={props.colorScale ? props.colorScale[0] : colorArr[0]} onClick={(e) => setDisplayed(changeValue(0))}/>
+                <rect x={151} y={49} width={10} height={10} fill={props.colorScale ? props.colorScale[1] : colorArr[1]} onClick={(e) => setDisplayed(changeValue(1))}/>
+                <rect x={221} y={49} width={10} height={10} fill={props.colorScale ? props.colorScale[2] : colorArr[2]} onClick={(e) => setDisplayed(changeValue(2))}/>
+                <rect x={289} y={49} width={10} height={10} fill={props.colorScale ? props.colorScale[3] : colorArr[3]} onClick={(e) => setDisplayed(changeValue(3))}/>
+                <rect x={362} y={49} width={10} height={10} fill={props.colorScale ? props.colorScale[4] : colorArr[4]} onClick={(e) => setDisplayed(changeValue(4))}/>
             </g>
         </svg>
     )

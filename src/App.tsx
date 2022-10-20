@@ -8,9 +8,23 @@ import LineChar from './components/linechar';
 import BarChar from './components/barChar';
 import BarChartSimple from './components/barChartSimple';
 import BarStack from './components/barStack';
-import BarStackComplex from './components/barStackComplex';
 import TaskChart from './components/taskChart';
+import GlobalChartBad from './components/globalChartBad';
 import GlobalChart from './components/globalChart';
+import TaskChartFinal from './components/taskFinal';
+import MockDele from './components/mockDele';
+import MockCambridge from './components/mockCambridge';
+//{<GlobalChart data={[[{x: 1, y: 1},{x: 2, y: 9},{x: 3, y: 2},{x: 4, y: 5}],[{x: 1, y: 9},{x: 2, y: 8},{x: 3, y: 3},{x: 4, y: 6}],[{x: 1, y: 7},{x: 2, y: 3},{x: 3, y: 10},{x: 4, y: 2}],[{x: 1, y: 6},{x: 2, y: 1},{x: 3, y: 4},{x: 4, y: 3}]]}/>}
+const data: Array<Array<{x: number,y: number,y0?:  number,completed: boolean}>> = [
+  [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: true},{x: 3, y: 4, completed: false},{x: 4, y: 4, completed: false}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}], 
+  [{x: 1, y: 4, completed: false},{x: 2, y: 4, completed: false},{x: 3, y: 4, completed: true},{x: 4, y: 4,completed: false}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}],
+  [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: false},{x: 3, y: 4, completed: true},{x: 4, y: 4,  completed: true}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}],
+  [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: true},{x: 3, y: 4, completed: false},{x: 4, y: 4,  completed: true}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}]
+]
+const donutData = [
+  {x: 2, y: 30},
+  {x: 1, y: 70}
+]
 
 function App() {
   const [showPieChars, setShowPieChars] = useState<boolean>(false)
@@ -30,8 +44,8 @@ function App() {
       {showLineChar && <LineChar/>}
       {showBarChar && <BarChar/>}
       <div style={{display: "flex", alignItems: "center", width: "100%", height: "100%", justifyContent: "center"}}>
-        <div style={{width: "100%", height: "100%"}}>  
-          {<GlobalChart/>}
+        <div style={{width: "50%", height: "100%"}}> 
+          <MockCambridge/>
         </div>
       </div>
     </div>

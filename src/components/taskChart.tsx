@@ -1,6 +1,15 @@
 import React from "react";
 import victory, {VictoryAxis, VictoryBar, VictoryBrushContainer, VictoryChart, VictoryGroup, VictoryLabel, VictoryLine, VictoryPie, VictoryScatter, VictoryStack} from "victory";
 
+const data: Array<Array<{x: number,y: number,y0?:  number,completed: boolean}>> = [
+    [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: true},{x: 3, y: 4,  completed: false},{x: 4, y: 4,  completed: false}], 
+    [{x: 1, y: 4, completed: false},{x: 2, y: 4, completed: false},{x: 3, y: 4,  completed: true},{x: 4, y: 4,  completed: false}],
+    [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: false},{x: 3, y: 4,  completed: true},{x: 4, y: 4,  completed: true}],
+    [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: true},{x: 3, y: 4,  completed: false},{x: 4, y: 4,  completed: true}]
+]
+
+
+
 const TaskChart = () => {
     const domainPadding: number = 40;
     const tickeLabelSize: string = "10px"
@@ -123,6 +132,25 @@ const TaskChart = () => {
                             {x: 2, y: 4, fill: "#0B8EAB"},
                             {x: 3, y: 4, fill: "#AAAAAA"},
                             {x: 4, y: 4, fill: "#0B8EAB"}
+                        ]}
+                        style={{
+                            data: {
+                                fill: ({datum}) => datum.fill
+                            }
+                        }}
+                    />
+                </g>
+                <g transform="translate(164.8, -0.7)">
+                    <VictoryScatter
+                        standalone={false}
+                        domainPadding={{y: 152}}
+                        symbol="square"
+                        size={12}
+                        data={[
+                            {x: 4, y: 1, fill: "white"},
+                            {x: 4, y: 2, fill: "white"},
+                            {x: 4, y: 3, fill: "white"},
+                            {x: 4, y: 4, fill: "white"}
                         ]}
                         style={{
                             data: {
