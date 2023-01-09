@@ -8,7 +8,12 @@ import React from "react";
 type SliceProps = {
     angle: number,
     radius: number,
-    style: {}
+    index?: number
+    style: {
+      fill: string,
+      transform: string,
+      transformOrigin: string
+    }
 }
 
 type DonutProps = {
@@ -18,17 +23,28 @@ type DonutProps = {
 }
 
 const Slice = (props: SliceProps) => {
-    const { angle, radius, ...rest } = props
+    const { angle, radius, style, index } = props
     const r = radius
     const dx = r * Math.sin(angle)
     const dy = r * (1 - Math.cos(angle))
-    
+    console.log(angle)
     return (
-      <path
-        id="Prueba"
-        {...rest}
-        d={`M${r} ${r}V0a${r} ${r} 0 0 1 ${dx} ${dy}z`}
-      />
+      <g>
+        <path
+          id={index ? `part${index}` : ""}
+          style={style}
+          d={`M${r} ${r}V0a${r} ${r} 0 0 1 ${dx} ${dy}z`}
+        />
+        <line fill="blue" />
+        {index && <>
+            <use xlinkHref={`#part${index}`} fill="none"/>
+            <text fill="#000" x={dx+(dx/2)+20} dy={(dy-(dy/2)*2)}>
+              <textPath xlinkHref={`#part${index}`} >{`Part ${index+1}`}</textPath>
+            </text>
+          </>
+        }
+      </g>
+
     )
   }
   
@@ -40,26 +56,30 @@ const Slice = (props: SliceProps) => {
     const radiusY = data.length > 4 ? radius+10 : radius+15;
 
     let rotate = 0.5 * Math.PI
+
+    //style={{border: "1px solid red"}}
     
     return (
       <svg
         width={diameter+100}
         height={diameter+100}
         viewBox={`0 0 ${diameter+100} ${diameter+100}`}
+        overflow="visible"
       >
         <g transform="translate(50,50)">
-        {data.map((value, i: number) => {
+        {data.map((value: number, i: number) => {
           const angle = 2 * Math.PI * 10 / total
           const angle2 = (angle * value) / 10
           const transform = `rotate(${rotate}rad)`
           const transformOrigin = `${radiusX}px ${radiusY}px`
           rotate += angle
-          
+      
           return (
             <>
               <Slice
                 angle={angle}
                 radius={radius}
+                index={i}
                 style={{ fill: "#D9D9D9", transform, transformOrigin}}
               />
               <Slice
@@ -67,11 +87,12 @@ const Slice = (props: SliceProps) => {
                 radius={radius}
                 style={{ fill: props.color[i], transform, transformOrigin}}
               />
-              <text y={rotate-angle}>Buenas</text>
             </>
           )
         })}
+        {/**<circle cx={radiusX} cy={radiusY} r={radius*0.6} fill="white"/> */}
         <circle cx={radiusX} cy={radiusY} r={radius*0.6} fill="white"/>
+        <text x={radiusX*2.12} y={radiusY*1.4}>Part 1</text>
         </g>
       </svg>
     )
@@ -80,4 +101,6 @@ const Slice = (props: SliceProps) => {
   export default DonutMod
   //        <circle cx={radius} cy={radius} r={radius} fill="transparent" stroke="white" strokeWidth={3}/>
 
-  //const data = [6, 2, 1, 8, 10, 4, 5, 2, 7, 8, 12]
+/**              <g transform="translate(50, 50)">
+                <text style={{transform}}>Hola</text>
+              </g> */
