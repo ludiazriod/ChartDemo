@@ -14,23 +14,37 @@ import GlobalChart from './components/globalChart';
 import TaskChartFinal from './components/taskFinal';
 import MockDele from './components/mockDele';
 import MockCambridge from './components/mockCambridge';
+import styled from "styled-components"
+import Donut from './components/scratch/donut';
+import DonutMod from './components/scratch/donutMod';
 //{<GlobalChart data={[[{x: 1, y: 1},{x: 2, y: 9},{x: 3, y: 2},{x: 4, y: 5}],[{x: 1, y: 9},{x: 2, y: 8},{x: 3, y: 3},{x: 4, y: 6}],[{x: 1, y: 7},{x: 2, y: 3},{x: 3, y: 10},{x: 4, y: 2}],[{x: 1, y: 6},{x: 2, y: 1},{x: 3, y: 4},{x: 4, y: 3}]]}/>}
-const data: Array<Array<{x: number,y: number,y0?:  number,completed: boolean}>> = [
-  [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: true},{x: 3, y: 4, completed: false},{x: 4, y: 4, completed: false}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}], 
-  [{x: 1, y: 4, completed: false},{x: 2, y: 4, completed: false},{x: 3, y: 4, completed: true},{x: 4, y: 4,completed: false}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}],
-  [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: false},{x: 3, y: 4, completed: true},{x: 4, y: 4,  completed: true}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}],
-  [{x: 1, y: 4, completed: true},{x: 2, y: 4, completed: true},{x: 3, y: 4, completed: false},{x: 4, y: 4,  completed: true}, {x: 5, y: 4, completed: true}, {x: 6, y: 4, completed: true}, {x: 7, y: 4, completed: true}, {x: 8, y: 4, completed: true}]
-]
+const yValue = 8
+const xValue = 10
+const data: Array<Array<{x: number,y: number, y0?: number,completed: boolean}>> = []
+
+for(let i: number = 0; i < yValue; i++){
+  const auxArr: Array<{x: number,y: number,y0?:  number,completed: boolean}> = []
+  for(let j: number = 0; j < xValue; j++){
+    auxArr.push({x: j+1, y: yValue, completed: (Math.random() < 0.5)})
+  }
+  data.push(auxArr)
+}
+
 const donutData = [
   {x: 2, y: 30},
   {x: 1, y: 70}
 ]
+
 
 function App() {
   const [showPieChars, setShowPieChars] = useState<boolean>(false)
   const [showGroupBarChar, setShowGroupBarChar] = useState<boolean>(false)
   const [showLineChar, setShowLineChar] = useState<boolean>(false)
   const [showBarChar, setShowBarChar] = useState<boolean>(false)
+  
+  const [numPie, setNumPie] = useState<number>(7)
+  const dataPie = [...new Array(numPie).fill(10)]
+  const radiusPie = 150
   return (
     <div className="App">
       <div>
@@ -43,13 +57,129 @@ function App() {
       {showGroupBarChar && <GroupChart/>}
       {showLineChar && <LineChar/>}
       {showBarChar && <BarChar/>}
-      <div style={{display: "flex", alignItems: "center", width: "100%", height: "100%", justifyContent: "center"}}>
-        <div style={{width: "50%", height: "100%"}}> 
-          <MockCambridge/>
-        </div>
+      <div>
+        <DonutMod
+          data={[...new Array(numPie).fill(1)].map(() => Math.floor(Math.random() * 10)+1)}
+          radius={radiusPie}
+          color={["#EAF6FF", "#C8E7FF", "#A0D6FF", "#73BFF9", "#479FF8", "#3274B5", "#1E4C7C", "#142E49"]}
+        />
+        <DonutMod
+          data={[...new Array(numPie).fill(1)].map(() => Math.floor(Math.random() * 10)+1)}
+          radius={radiusPie}
+          color={["#E7FFF3","#C7FFE3", "#7EE7B2", "#5ECC95", "#57A980", "#377E5B","#25553D", "#142D20"]}
+        />
+        <DonutMod
+          data={[...new Array(numPie).fill(1)].map(() => Math.floor(Math.random() * 10)+1)}
+          radius={radiusPie}
+          color={["#FFEFDF", "#FDDAB1", "#F7C787", "#ECB561", "#DDA43F", "#945A21", "#6C3A15", "#421E0B"]}
+        />
+        <DonutMod
+          data={[...new Array(numPie).fill(1)].map(() => Math.floor(Math.random() * 10)+1)}
+          radius={radiusPie}
+          color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#984253", "#7C3341", "#5F2530", "#41171F"]}
+        />
+        <DonutMod
+          data={dataPie}
+          radius={radiusPie}
+          color={["#EAF6FF", "#C8E7FF", "#A0D6FF", "#73BFF9", "#479FF8", "#3274B5", "#1E4C7C", "#142E49"]}
+        />
+        <DonutMod
+          data={dataPie}
+          radius={radiusPie}
+          color={["#E7FFF3","#C7FFE3", "#7EE7B2", "#5ECC95", "#57A980", "#377E5B","#25553D", "#142D20"]}
+        />
+        <DonutMod
+          data={dataPie}
+          radius={radiusPie}
+          color={["#FFEFDF", "#FDDAB1", "#F7C787", "#ECB561", "#DDA43F", "#945A21", "#6C3A15", "#421E0B"]}
+        />
+        <DonutMod
+          data={dataPie}
+          radius={radiusPie}
+          color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#984253", "#7C3341", "#5F2530", "#41171F"]}
+        />
       </div>
     </div>
   );
 }
 
 export default App;
+/*
+<TaskChartFinal 
+  barData={data} 
+  donutData={[
+    {x: 2, y: 70},
+    {x: 1, y: 30},
+  ]}
+  transparencyScale={["#0B8EAB66", "#4DA679", "#418C67", "#295941"]}
+  barChartHeight={data.length < 5 ? 200 : 330}
+/>
+*/
+
+const Main = styled.div`
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    div {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #0B8EAB;
+        animation: Main 1.2s linear infinite;
+    }
+    div:nth-child(1){
+        top: 8px;
+        left: 8px;
+        animation-delay: 0s;
+    }
+    div:nth-child(2){
+        top: 8px;
+        left: 32px;
+        animation-delay: -0.4s;
+    }
+    div:nth-child(3){
+        top: 8px;
+        left: 56px;
+        animation-delay: -0.8s;
+    }
+    div:nth-child(4){
+        top: 32px;
+        left: 8px;
+        animation-delay: -0.4s;
+    }
+    div:nth-child(5){
+        top: 32px;
+        left: 32px;
+        animation-delay: -0.8s;
+    }
+    div:nth-child(6){
+        top: 32px;
+        left: 56px;
+        animation-delay: -1.2s;
+    }
+    div:nth-child(7){
+        top: 56px;
+        left: 8px;
+        animation-delay: -0.8s;
+    }
+    div:nth-child(8){
+        top: 56px;
+        left: 32px;
+        animation-delay: -1.2s;
+    }
+    div:nth-child(9){
+        top: 56px;
+        left: 56px;
+        animation-delay: -1.6s;
+    }
+    @keyframes Main {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+`
