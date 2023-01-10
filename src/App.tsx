@@ -6,6 +6,7 @@ import PieChart from './components/piechart';
 import GroupChart from './components/groupchart';
 import LineChar from './components/linechar';
 import BarChar from './components/barChar';
+import BarStack from './components/barStack';
 
 function App() {
   const [showPieChars, setShowPieChars] = useState<boolean>(false)
@@ -24,6 +25,7 @@ function App() {
       {showGroupBarChar && <GroupChart/>}
       {showLineChar && <LineChar/>}
       {showBarChar && <BarChar/>}
+      <BarStack/>
     </div>
   );
 }
