@@ -27,7 +27,6 @@ const Slice = (props: SliceProps) => {
     const r = radius
     const dx = r * Math.sin(angle)
     const dy = r * (1 - Math.cos(angle))
-    console.log(angle)
     return (
       <g>
         <path

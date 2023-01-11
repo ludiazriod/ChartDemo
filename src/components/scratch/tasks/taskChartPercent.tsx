@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 type Props = {
     data: Array<{
@@ -11,20 +11,22 @@ type Props = {
     constAuxColor?: string
 }
 
-const TaskChartMod = (props: Props) => {
-    const textColor = [ "#737373", "#8D8D8D", "#A6A6A6", "#C0C0C0", "#D9D9D9", "#DDDDDD", "#E1E1E1", "#E4E4E4", "#E8E8E8"]
+const TaskChartPercent = (props: Props) => {
+    const maxWidth: number = 500;
     return(
         <MainDiv>
+            <Legend colors={props.color}/>
             {props.data.map((elem, index) => {
                 return <BarWrapper>
                     <span>{`Part ${index+1}`}</span>
                     <TotalData>
-                        <TotalCompleted value={500*elem.completed}>
-                            <TotalPassed color={props.color[index]} colorText={index > 4 ? "#e2e1e1" : "#454545"} value={(500*elem.completed)*elem.passed}>
-                                <span>{(elem.completed * elem.passed) * 100}%</span>
+                        <TotalCompleted value={(maxWidth*elem.completed)/elem.total}>
+                            <TotalPassed value={(((maxWidth*elem.completed)/elem.total)*elem.passed)/elem.completed} color={props.color[index]} colorText={index > 4 ? "#e2e1e1" : (props.constAuxColor ? props.constAuxColor : "#454545")}>
+                                <span>{elem.passed}</span>
                             </TotalPassed>
-                            {/**<span style={{width: "50%"}}>{elem.completed*100}%</span>*/}
+                            <span style={{width: "50%"}}>{elem.completed}</span>
                         </TotalCompleted>
+                        <span style={{width: "50%"}}>{elem.total}</span>
                     </TotalData>
                 </BarWrapper>
             })}
@@ -32,7 +34,8 @@ const TaskChartMod = (props: Props) => {
     )
 }
 
-export default TaskChartMod;
+export default TaskChartPercent
+
 
 const MainDiv = styled.div`
     display: flex;
@@ -44,15 +47,20 @@ const MainDiv = styled.div`
         font-size: 20px;
     }
 `
-
 const BarWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
 `
-
+const Legend = styled.div<{colors: string[]}>`
+    width: 70px;
+    height: 70px;
+    background-image: ${props => `linear-gradient(${props.colors.toString()})`};
+`
 const TotalData = styled.div`
-    justify-content: flex-start;
+    display: flex;
+    text-align: end;
+    align-items: center;
     border: none;
     background: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -61,7 +69,7 @@ const TotalData = styled.div`
     border-radius: 10px;
     margin: 20px 20px;
     overflow: hidden;
-   
+    padding-right: 5px;
 `
 const TotalCompleted = styled.div<{value: number}>`
     display: flex;
@@ -106,4 +114,3 @@ const TotalPassed = styled.div<{color: string, colorText: string, value: number}
         }
     }
 `
-

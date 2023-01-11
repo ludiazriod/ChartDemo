@@ -18,6 +18,7 @@ import styled from "styled-components"
 import Donut from './components/scratch/donut/donut';
 import DonutMod from './components/scratch/donut/donutMod';
 import TaskChartMod from './components/scratch/tasks/taskChart';
+import TaskChartPercent from './components/scratch/tasks/taskChartPercent';
 //{<GlobalChart data={[[{x: 1, y: 1},{x: 2, y: 9},{x: 3, y: 2},{x: 4, y: 5}],[{x: 1, y: 9},{x: 2, y: 8},{x: 3, y: 3},{x: 4, y: 6}],[{x: 1, y: 7},{x: 2, y: 3},{x: 3, y: 10},{x: 4, y: 2}],[{x: 1, y: 6},{x: 2, y: 1},{x: 3, y: 4},{x: 4, y: 3}]]}/>}
 const yValue = 8
 const xValue = 10
@@ -27,14 +28,14 @@ const dataTask: Array<{
   completed: number,
   passed: number
 }> = [
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5},
-  {total: 10, completed: 0.5, passed: 0.5}
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3},
+  {total: 12, completed: 6, passed: 3}
 ]
 
 for(let i: number = 0; i < yValue; i++){
@@ -72,6 +73,14 @@ function App() {
       {showGroupBarChar && <GroupChart/>}
       {showLineChar && <LineChar/>}
       {showBarChar && <BarChar/>}
+      <div style={{display:  "flex"}}>
+        <TaskChartPercent data={dataTask} color={["#FFEFDF", "#FDDAB1", "#F7C787", "#ECB561", "#DDA43F", "#945A21", "#6C3A15", "#421E0B"]}/>
+        <TaskChartPercent data={dataTask} color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#c55269", "#7C3341", "#5F2530", "#41171F"]}/>
+      </div> <br/><br/><br/>
+      <div style={{display:  "flex"}}>
+        <TaskChartPercent data={dataTask} color={["#EAF6FF", "#C8E7FF", "#A0D6FF", "#73BFF9", "#479FF8", "#3274B5", "#1E4C7C", "#142E49"]}/>
+        <TaskChartPercent data={dataTask} color={["#E7FFF3","#C7FFE3", "#7EE7B2", "#5ECC95", "#57A980", "#377E5B","#25553D", "#142D20"]}/>
+      </div> <br/><br/><br/>
     </div>
   );
 }
@@ -88,6 +97,29 @@ export default App;
   barChartHeight={data.length < 5 ? 200 : 330}
 />
 */
+
+/**
+ *       <div style={{display:  "flex"}}>
+        <TaskChartPercent data={dataTask} color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#b84b61", "#7C3341", "#5F2530", "#41171F"]}/>
+        <TaskChartPercent data={dataTask} color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#b84b61", "#7C3341", "#5F2530", "#41171F"]}/>
+      </div> <br/><br/><br/>
+      <div style={{display:  "flex"}}>
+        <TaskChartMod data={dataTask} color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#b84b61", "#7C3341", "#5F2530", "#41171F"]}/>
+        <TaskChartMod data={dataTask} color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#b84b61", "#7C3341", "#5F2530", "#41171F"]}/>
+      </div> <br/><br/><br/>
+    </div>
+ * 
+ */
+
+/**      <div style={{display:  "flex"}}>
+        <TaskChartMod data={dataTask} color={["#FFEFDF", "#FDDAB1", "#F7C787", "#ECB561", "#DDA43F", "#945A21", "#6C3A15", "#421E0B"]}/>
+        <TaskChartMod data={dataTask} color={["#F3B9DC", "#E89BC1", "#D97FA3", "#C76884", "#b84b61", "#7C3341", "#5F2530", "#41171F"]}/>
+      </div> <br/><br/><br/>
+      <div style={{display:  "flex"}}>
+        <TaskChartMod data={dataTask} color={["#EAF6FF", "#C8E7FF", "#A0D6FF", "#73BFF9", "#479FF8", "#3274B5", "#1E4C7C", "#142E49"]}/>
+        <TaskChartMod data={dataTask} color={["#E7FFF3","#C7FFE3", "#7EE7B2", "#5ECC95", "#57A980", "#377E5B","#25553D", "#142D20"]}/>
+      </div> <br/><br/><br/>
+    </div> */
 
 /**
  *       <div>
