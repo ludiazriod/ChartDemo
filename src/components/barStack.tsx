@@ -1,35 +1,38 @@
-import React from "react"
-import { VictoryBar, VictoryChart, VictoryStack } from "victory";
+import React from "react";
+import victory, {VictoryBar, VictoryChart, VictoryGroup, VictoryLabel, VictoryLine, VictoryPie, VictoryStack} from "victory";
 
 const BarStack = () => {
     return(
+    
         <VictoryChart
-        categories={{x: ["Task#4", "Task#3", "Task#1", "Task#2" ], y:["10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]}}
-        horizontal
+            categories={{x:["Task#4", "Task#3", "Task#2", "Task#1"], y:["10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]}}
+            horizontal
+            domainPadding={{x: 40}}
         >
             <VictoryStack
-              colorScale={["#0B8EAB", "#D9D9D9"]}
+                colorScale={["#D9D9D9", "#1E4C7C"]}
+                
             >
                 <VictoryBar
-                    data={[{x: 1, y: 5, fill: "#73BFF9"}, {x: 2, y: 3, fill: "#479FF8"}, {x: 3, y: 5, fill: "#3274B5"}, {x: 4, y: 8, fill: "#1E4C7C"}]}
                     style={{
                         data: {
                             fill: ({datum}) => datum.fill
                         }
                     }}
+                    data={[{x: 1, y: 5, fill: "#1E4C7C"}, {x: 2, y:4, fill: "#3274B5"}, {x: 3, y: 8, fill: "#479FF8"}, {x: 4 , y: 3, fill: "#73BFF9"}]}
                 />
                 <VictoryBar
-                    data={[{x: 1, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}, {x: 4, y: 0}]}
-                />
-                <VictoryBar
-                    data={[{x: 1, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}, {x: 4, y: 0}]}
-                />
-                <VictoryBar
-                    data={[{x: 1, y: 5}, {x: 2, y: 7}, {x: 3, y: 5}, {x: 4, y: 2}]}
+                    style={{
+                        data: {
+                            fill: ({datum}) => datum.fill
+                        }
+                    }}
+                    data={[{x: 1, y: 5, fill: "#D9D9D9"}, {x: 2, y: 6, fill: "#D9D9D9"}, {x: 3, y: 2, fill: "#D9D9D9"}, {x: 4, y: 7, fill: "#D9D9D9"}]}
                 />
             </VictoryStack>
         </VictoryChart>
+      
     )
 }
 
-export default BarStack;
+export default BarStack
